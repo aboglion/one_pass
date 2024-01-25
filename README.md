@@ -18,10 +18,10 @@ pip install ONE_PASS
 ### Initialization and Managing Secrets
 
 1. **Import and Initialize**: 
-   In your Python environment, import and run the `env` function from `ONE_PASS`:
+   In your Python environment, import and run the `env` function from `one-pass`:
    ```
-   import ONE_PASS
-   ONE_PASS.env()
+   import one-pass
+   one-pass.env()
    ```
    This will check for the presence of configuration and secret files in your directory.
 
