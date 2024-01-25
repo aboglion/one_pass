@@ -4,7 +4,6 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 from cryptography.fernet import Fernet
-
 import base64
 import cryptography
 
@@ -127,6 +126,31 @@ def read_credentials(file_name):
         exit()
 
 
+def get_type_of_input(input_str):
+    try:
+        # Try to convert the input to int
+        value = int(input_str)
+        return value
+    except ValueError:
+        try:
+            # Try to convert the input to float
+            value = float(input_str)
+            return value
+        except ValueError:
+            if input_str.startswith("[") and input_str.endswith("]"):
+                try:
+                    # Try to parse the input as a list
+                    value = eval(input_str)
+                    if isinstance(value, list):
+                        return value
+                except:
+                    pass
+
+            # Check if the string is enclosed in quotes
+            if len(input_str) > 2 and input_str[0] == input_str[-1] and input_str[0] in "\"'":
+                return input_str[1:-1]
+            return input_str  # Return the string as is if not enclosed in quotes
+
 
 def env():
     config_file_name = '.p.p'
@@ -158,6 +182,14 @@ def env():
             decrypt_file(encrypted_file_name, decrypted_file_name, password)
 
     try:
-        with open(decrypted_file_name, 'r') as file:
-            return dict(line.strip().split('=') for line in file if line.strip())
+        with open(decrypted_file_name, 'r') as f:
+                data={}
+                for i in f:
+                    k_v=i.strip().split('=')
+                    if len(k_v)==2:
+                        key=k_v[0].strip()
+                        val=get_type_of_input(k_v[1].strip())
+                        data[key] = val
+      
+        return data
     except Exception as e: print(e)
