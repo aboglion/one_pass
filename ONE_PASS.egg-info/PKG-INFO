@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: ONE_PASS
-Version: 0.1.3
-Summary: To manage private variables with only one password, a key and the name of the encrypted file. To protect sensitive data from being uploaded to GitHub
-Author: U.N.S
-Author-email: aboglion@gmail.com
-Keywords: encryption,security,configuration
-License-File: LICENSE
-Requires-Dist: cryptography
