@@ -9,9 +9,9 @@
 
 Install `ONE_PASS` using pip:
 
-\```bash
+```
 pip install ONE_PASS
-\```
+```
 
 ## Usage
 
